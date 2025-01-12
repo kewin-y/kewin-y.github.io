@@ -1,0 +1,40 @@
+---
+
+const headerButtons = ["about", "blogs", "projects"];
+
+---
+
+<header class="bg-gray-100 w-6/12 mx-auto my-4 p-4 sticky">
+  <nav class="flex flex-col lg:flex-row justify-between">
+    <div class="flex justify-between">
+      <a href="/" class="font-serif hover:text-gray-400">Kevin</a>
+      <button class="font-bold menu-btn ml-auto lg:hidden focus:outline-none">
+        &#9776;
+      </button>
+    </div>
+    <div class="hidden lg:inline menu bg-sand-200 mt-8 lg:mt-0">
+      <ul class="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-16">
+        {
+        headerButtons.map((button) => (
+        <li>
+          <a href=`/${button}` class:list={["font-serif hover:text-gray-400", Astro.url.pathname.includes(`/${button}`) ? "text-sand-300" : "" ]}>
+            {button}
+          </a>
+        </li>
+        ))
+        }
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+
+const menuButton = document.querySelector(".menu-btn");
+const menu = document.querySelector(".menu");
+
+menuButton?.addEventListener("click", ()=> {
+  menu?.classList.toggle("hidden");
+});
+
+</script>
