@@ -1,13 +1,11 @@
 ---
-
 const headerButtons = ["about", "blogs", "projects"];
-
 ---
 
-<header class="bg-gray-100 w-6/12 mx-auto my-4 p-4 sticky">
+<header class="bg-white w-7/12 p-4 mx-auto my-4 top-4 sticky">
   <nav class="flex flex-col lg:flex-row justify-between">
     <div class="flex justify-between">
-      <a href="/" class="font-serif hover:text-gray-400">Kevin</a>
+      <a href="/" class="font-serif hover:text-gray-400">kevin yu</a>
       <button class="font-bold menu-btn ml-auto lg:hidden focus:outline-none">
         &#9776;
       </button>
@@ -17,7 +15,7 @@ const headerButtons = ["about", "blogs", "projects"];
         {
         headerButtons.map((button) => (
         <li>
-          <a href=`/${button}` class:list={["font-serif hover:text-gray-400", Astro.url.pathname.includes(`/${button}`) ? "text-sand-300" : "" ]}>
+          <a href=`/${button}` class:list={["font-serif hover:text-gray-400", Astro.url.pathname.includes(`/${button}`) ? "text-gray-400" : "" ]}>
             {button}
           </a>
         </li>

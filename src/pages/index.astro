@@ -1,8 +1,38 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
+import  BaseHead from "../components/BaseHead.astro";
+
+const links = ["about", "blogs", "projects"];
 ---
 
-<Layout title="Kevin">
-  <Header />
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="Kevin Yu" />
+  </head>
+  <body class="overflow-hidden flex justify-center h-screen">
+    <div class="m-auto flex flex-col gap-4">
+      <p class="text-sm md:text-base">kevin yu</p>
+      <img
+        src=" https://avatars.githubusercontent.com/u/117776536?v=4"
+        class="w-64 md:w-80"
+      />
+      <ul class="flex justify-between">
+        {
+        links.map((link) => (
+        <li>
+          <a href=`/${link}` class="text-sm md:text-base hover:text-gray-400">
+            {link}
+          </a>
+        </li>
+        ))
+        }
+      </ul>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: serif;
+  }
+</style>
