@@ -18,8 +18,19 @@ const { Content } = await render(post);
 ---
 
 <Layout title=`Kevin Yu | ${post.data.title}`>
-  <div class="mb-8">
-    <h2 class="font-bold text-2xl">{post.data.title}</h2>
+  <div class="border-b-black border-b-2 gap-4 flex flex-col pb-7 mb-7 ">
+    <h1 class="text-5xl">{post.data.title.toUpperCase()}</h1>
+    <time datetime={post.data.pubDate.toISOString()}>
+      {
+        post.data.pubDate
+          .toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })
+          .toUpperCase()
+      }
+    </time>
   </div>
   <div class="prose">
     <Content />

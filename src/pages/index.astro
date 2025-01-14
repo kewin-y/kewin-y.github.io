@@ -11,7 +11,7 @@ const links = ["about", "blogs", "projects"];
   </head>
   <body class="overflow-hidden flex justify-center h-screen">
     <div class="m-auto flex flex-col gap-4">
-      <p class="text-sm md:text-base">kevin yu</p>
+      <p class="text-sm md:text-base">KEVIN YU</p>
       <img
         src=" https://avatars.githubusercontent.com/u/117776536?v=4"
         class="w-64 md:w-80"
@@ -21,7 +21,7 @@ const links = ["about", "blogs", "projects"];
         links.map((link) => (
         <li>
           <a href=`/${link}` class="text-sm md:text-base hover:text-gray-400">
-            {link}
+            {link.toUpperCase()}
           </a>
         </li>
         ))
@@ -30,9 +30,3 @@ const links = ["about", "blogs", "projects"];
     </div>
   </body>
 </html>
-
-<style>
-  body {
-    font-family: serif;
-  }
-</style>
