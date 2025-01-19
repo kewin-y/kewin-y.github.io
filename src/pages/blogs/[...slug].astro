@@ -19,7 +19,7 @@ const { Content } = await render(post);
 
 <Layout title=`Kevin Yu | ${post.data.title}`>
   <div class="border-b-black border-b-2 gap-4 flex flex-col pb-7 mb-7 ">
-    <h1 class="text-5xl">{post.data.title.toUpperCase()}</h1>
+    <h1 class="text-3xl font-bold">{post.data.title.toUpperCase()}</h1>
     <time datetime={post.data.pubDate.toISOString()}>
       {
         post.data.pubDate
@@ -32,7 +32,7 @@ const { Content } = await render(post);
       }
     </time>
   </div>
-  <div class="prose">
+  <div class="prose content">
     <Content />
   </div>
 </Layout>

@@ -1,5 +1,36 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blogs")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<Layout title="Kevin Yu | Blogs"> Here are my blogs 🤓 </Layout>
+<Layout title="Kevin Yu | Blogs">
+  <ul class="flex flex-col gap-8">
+    {
+      posts.map((post) => (
+        <li>
+          <div class="flex justify-between">
+            <a
+              href={`/blogs/${post.id}`}
+              class="text-3xl font-bold hover:text-gray-400"
+            >
+              {post.data.title.toUpperCase()}
+            </a>
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate
+                .toLocaleDateString("en-us", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })
+                .toUpperCase()}
+            </time>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
