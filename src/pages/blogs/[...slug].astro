@@ -18,7 +18,7 @@ const { Content } = await render(post);
 ---
 
 <Layout title=`Kevin Yu | ${post.data.title}`>
-  <div class="border-b-black border-b-2 gap-4 flex flex-col pb-7 mb-7">
+  <div class="border-b-black border-b-2 gap-4 flex flex-col pb-5 mb-5">
     <h1 class="text-3xl font-bold">{post.data.title.toUpperCase()}</h1>
     <time datetime={post.data.pubDate.toISOString()}>
       {
