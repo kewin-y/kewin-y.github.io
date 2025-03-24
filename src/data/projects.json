@@ -1,0 +1,19 @@
+[
+  {
+    "title": "flake",
+    "description": "My NixOS dotfiles. Uses labwc amongst many other things.",
+    "link": "https://github.com/kewin-y/flake",
+    "tags": ["nix", "dotfiles"]
+  },
+  {
+    "title": "nixvim-config",
+    "description": "My configs for Neovim using NixVim.",
+    "link": "https://github.com/kewin-y/nixvim-config",
+    "tags": ["nix", "dotfiles", "nvim"]
+  },
+  {
+    "title": "Saving the world",
+    "description": "I'm gonna save the world",
+    "tags": ["superhero", "world"]
+  }
+]

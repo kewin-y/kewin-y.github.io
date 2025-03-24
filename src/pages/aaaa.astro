@@ -1,0 +1,32 @@
+---
+import  BaseHead from "../components/BaseHead.astro";
+
+const links = ["about", "blogs", "projects"];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title="Kevin Yu" />
+  </head>
+  <body class="overflow-hidden flex justify-center h-screen">
+    <div class="m-auto flex flex-col gap-4">
+      <p class="text-sm md:text-base">KEVIN YU</p>
+      <img
+        src=" https://avatars.githubusercontent.com/u/117776536?v=4"
+        class="w-64 md:w-80"
+      />
+      <ul class="flex justify-between">
+        {
+        links.map((link) => (
+        <li>
+          <a href=`/${link}` class="text-sm md:text-base hover:text-gray-400">
+            {link.toUpperCase()}
+          </a>
+        </li>
+        ))
+        }
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,46 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import projects from "../../data/projects.json";
 ---
 
-<Layout title="Kevin Yu | Projects"> Here are my projects 🤓 </Layout>
+<Layout title="Kevin Yu | Projects">
+  <h1 class="text-3xl font-bold mb-5">Projects ..</h1>
+  <ul class="grid grid-cols-2 gap-8">
+    {
+      projects.map((project) => (
+        <li class="border-black border-2 p-2 flex flex-col gap-2">
+          <h1 class="font-bold">{project.title.toUpperCase()}</h1>
+          <p>{project.description}</p>
+          {project.link && (
+            <a
+              href={project.link}
+              class="flex gap-1 w-fit underline text-gray-600 hover:text-gray-400"
+            >
+              link
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1l9-9m-5 0h5v5"
+                />
+              </svg>
+            </a>
+          )}
+          <ul class="flex gap-4">
+            {project.tags.map((tag) => (
+              <li class="border-black border-2 px-2">{tag}</li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>
