@@ -1,50 +1,51 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import Link from "../components/Link.astro"
+import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
 
 const links = {
-  Github: "https://github.com/kewin-y",
-  LinkedIn: "https://www.linkedin.com/in/kevin-yu-1a2531330/",
-}
+    Github: "https://github.com/kewin-y",
+    LinkedIn: "https://www.linkedin.com/in/kevin-yu-1a2531330/",
+};
 ---
 
 <Layout title="Kevin Yu">
-  <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">HELLO!</h1>
-  <div class="flex flex-col gap-4">
-    <p>
-      Hello! I am Kevin. I am an undergraduate student studying math and
-      computer science at the University of Toronto. My interests lie in game
-      development and graphics programming.
-    </p>
-    <p>
-      I like using Neovim and NixOS. My favourite programming languages are C
-      and C++, but I would love to learn Rust and get better at Python.
-    </p>
-    <p>
-      In my free time, I enjoy playing video games, reading, listening to music,
-      and working out.
-    </p>
-    <ul class="flex gap-2">
-      Check out my ..
-      {
-        Object.entries(links).map(([key, value]) => (
-          <li>
-            <Link text={key} href={value} />
-          </li>
-        ))
-      }
-    </ul>
-    <div class="flex flex-col mt-5 gap-5">
-      <iframe
-        class="self-center"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/y74KCjnbStg?si=Yq-a7yZGH9GVuPfU"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
-      <p class="self-center italic text-gray-800">I checked out</p>
+    <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">HELLO!</h1>
+    <div class="flex flex-col gap-4">
+        <p>
+            Hello! I am Kevin. I am an undergraduate student studying math and
+            computer science at the University of Toronto. My interests lie in
+            game development and graphics programming.
+        </p>
+        <p>
+            I like using Neovim and NixOS. My favourite programming languages
+            are C and C++, but I would love to learn Rust and get better at
+            Python.
+        </p>
+        <p>
+            In my free time, I enjoy playing video games, reading, listening to
+            music, and working out.
+        </p>
+        <ul class="flex gap-2">
+            Check out my ..
+            {
+                Object.entries(links).map(([key, value]) => (
+                    <li>
+                        <Link text={key} href={value} />
+                    </li>
+                ))
+            }
+        </ul>
+        <div class="flex flex-col mt-5 gap-5">
+            <iframe
+                class="self-center"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/y74KCjnbStg?si=Yq-a7yZGH9GVuPfU"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            <p class="self-center italic text-gray-800">I checked out</p>
+        </div>
     </div>
-  </div>
 </Layout>
