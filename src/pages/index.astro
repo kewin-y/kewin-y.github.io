@@ -10,7 +10,7 @@ const links = {
 
 <Layout title="Kevin Yu">
     <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">HELLO!</h1>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-5">
         <p>
             Hello! I am Kevin. I am an undergraduate student studying math and
             computer science at the University of Toronto. My interests lie in
@@ -25,19 +25,22 @@ const links = {
             In my free time, I enjoy playing video games, reading, listening to
             music, and working out.
         </p>
-        <ul class="flex gap-2">
-            Check out my ..
-            {
-                Object.entries(links).map(([key, value]) => (
-                    <li>
-                        <Link text={key} href={value} />
-                    </li>
-                ))
-            }
-        </ul>
-        <div class="flex flex-col mt-5 gap-5">
+        <div>
+            Check out my:
+            <ul class="flex flex-wrap gap-2">
+                {
+                    Object.entries(links).map(([key, value]) => (
+                        <li>
+                            <Link text={key} href={value} />
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+        <div class="border-b-2 border-black"></div>
+        <div class="relative overflow-hidden w-[100%] pt-[56.25%]">
             <iframe
-                class="self-center"
+                class="absolute top-0 left-0 h-[100%] w-[100%]"
                 width="560"
                 height="315"
                 src="https://www.youtube.com/embed/y74KCjnbStg?si=Yq-a7yZGH9GVuPfU"
@@ -45,7 +48,7 @@ const links = {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen></iframe>
-            <p class="self-center italic text-gray-800">I checked out</p>
         </div>
+        <p class="self-center text-sm text-gray-600 italic">I checked out</p>
     </div>
 </Layout>

@@ -17,9 +17,9 @@ const { title } = Astro.props;
         <BaseHead title={title} />
         <ClientRouter />
     </head>
-    <body class="flex flex-col h-[100vh]" transition:animate="fade">
+    <body class="w-5/12 mx-auto flex flex-col h-[100vh]" transition:animate="fade">
         <Header />
-        <main class="w-1/2 mx-auto my-5">
+            <main class="my-5">
             <slot />
         </main>
         <Footer />
