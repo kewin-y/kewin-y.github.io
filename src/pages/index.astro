@@ -1,57 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
 
 const links = {
-  github: "https://github.com/kewin-y",
-  linkedin: "https://www.linkedin.com/in/kevin-yu-1a2531330/",
+  Github: "https://github.com/kewin-y",
+  LinkedIn: "https://www.linkedin.com/in/kevin-yu-1a2531330/",
 };
 ---
 
 <Layout title="Kevin Yu">
-  <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">HELLO!</h1>
-  <div class="flex flex-col gap-4">
-    <p>
-      Hello! I am Kevin. I am an undergraduate student studying mathematics at
-      the University of Toronto. My interests lie in machine learning and game
-      development.
-    </p>
-    <p>
-      I like using Neovim and NixOS. My favourite programming languages are C
-      and Python, but I want to learn Haskell.
-    </p>
-    <p>
-      In my free time, I enjoy playing video games, reading, listening to music,
-      and working out.
-    </p>
-    <ul class="flex gap-2">
-      Check out my ..
-      {
-        Object.entries(links).map(([key, value]) => (
-          <li>
-            <a
-              href={value}
-              class="flex gap-1 underline text-gray-600 hover:text-gray-400"
-            >
-              {key}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6m-7 1l9-9m-5 0h5v5"
-                />
-              </svg>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
+        <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">HELLO!</h1>
+        <div class="flex flex-col gap-4">
+            <p>
+            Hello! I am Kevin. I am an undergraduate student studying math and computer science at
+            the University of Toronto. My interests lie in game development and graphics programming.
+            </p>
+            <p>
+            I like using Neovim and NixOS. My favourite programming languages are C and C++, but I would love to learn Rust and get better at Python.
+            </p>
+            <p>
+            In my free time, I enjoy playing video games, reading, listening to music,
+            and working out.
+            </p>
+            <ul class="flex gap-2">
+                Check out my ..
+                {
+                Object.entries(links).map(([key, value]) => (
+                <li>
+                    <Link title={key} href={value}/>
+                </li>
+                ))
+                }
+            </ul>
+            <div class="flex flex-col mt-5 gap-8">
+                <iframe class="self-center" width="560" height="315" src="https://www.youtube.com/embed/y74KCjnbStg?si=Yq-a7yZGH9GVuPfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <p class="self-center italic text-gray-800">I checked out</p>
+            </div>
+        </div>
 </Layout>

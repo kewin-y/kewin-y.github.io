@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
 
 type Props = {
@@ -14,10 +15,11 @@ const { title } = Astro.props;
   <head>
     <BaseHead title={title} />
   </head>
-  <body>
+  <body class="flex flex-col h-[100vh]">
     <Header />
-    <main class="w-7/12 mx-auto my-7">
+    <main class="w-1/2 mx-auto my-5">
       <slot />
     </main>
+    <Footer/>
   </body>
 </html>
