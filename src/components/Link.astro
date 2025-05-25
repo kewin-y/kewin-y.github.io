@@ -4,14 +4,14 @@ type Props = {
     href: string,
 };
 
-const { title, href } = Astro.props;
+const { text, href } = Astro.props;
 ---
 
 <a
   href={href}
   class="flex gap-1 underline text-gray-600 hover:text-gray-400"
 >
-  {title}
+  {text}
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"

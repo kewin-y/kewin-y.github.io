@@ -33,7 +33,7 @@ const posts = (await getCollection("blogs")).sort(
               </time>
             </div>
                 <p>{post.data.description}</p>
-                <Link title="Read More" href={`/blogs/${post.id}`}/>
+                <Link text="Read More" href={`/blogs/${post.id}`}/>
           </li>
         ))
       ) : (
@@ -42,3 +42,4 @@ const posts = (await getCollection("blogs")).sort(
     }
   </ul>
 </Layout>
+
