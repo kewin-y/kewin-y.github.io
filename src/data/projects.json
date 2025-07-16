@@ -1,15 +1,21 @@
 [
   {
+    "title": "kewin-craft",
+    "description": "Minecraft clone written in C++",
+    "link": "https://github.com/kewin-y/kewin-craft",
+    "tags": ["C++", "OpenGL"]
+  },
+  {
     "title": "flake",
     "description": "My NixOS dotfiles",
     "link": "https://github.com/kewin-y/flake",
     "tags": ["nix", "dotfiles"]
   },
   {
-    "title": "nixvim-config",
-    "description": "My configs for Neovim using NixVim",
-    "link": "https://github.com/kewin-y/nixvim-config",
-    "tags": ["nix", "dotfiles", "nvim"]
+    "title": "nvim-kewin",
+    "description": "My Neovim config",
+    "link": "https://github.com/kewin-y/nvim-kewin",
+    "tags": ["dotfiles", "nvim", "lua"]
   },
   {
     "title": "Saving the world",
