@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Link from "../../components/Link.astro";
+import Project from "../../components/Project.astro";
 import projects from "../../data/projects.json";
 ---
 
@@ -9,23 +9,6 @@ import projects from "../../data/projects.json";
         PROJECTS
     </h1>
     <ul class="flex flex-col gap-5 md:grid grid-cols-2 gap-5">
-        {
-            projects.map((project) => (
-                <li class="border-black border-2 p-2 flex flex-col gap-2">
-                    <h1 class="font-bold">{project.title.toUpperCase()}</h1>
-                    <p>{project.description}</p>
-                    {project.link ? (
-                        <Link text="See More" href={project.link} />
-                    ) : (
-                        <p class="text-gray-400 ">no link</p>
-                    )}
-                    <ul class="flex flex-wrap gap-4">
-                        {project.tags.map((tag) => (
-                            <li class="border-black border-2 px-2">{tag}</li>
-                        ))}
-                    </ul>
-                </li>
-            ))
-        }
+        {projects.map((project) => <Project project={project} />)}
     </ul>
 </Layout>

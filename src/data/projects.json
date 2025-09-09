@@ -1,25 +1,36 @@
 [
   {
+    "title": "Todo Good",
+    "description": "Obligatory Todo App",
+    "link": "https://github.com/kewin-y/todo-good",
+    "tags": ["ReactJS", "Python", "PostgreSQL"],
+    "starred": true
+  },
+  {
     "title": "kewin-craft",
     "description": "Minecraft clone written in C++",
     "link": "https://github.com/kewin-y/kewin-craft",
-    "tags": ["C++", "OpenGL"]
+    "tags": ["C++", "OpenGL"],
+    "starred": true
   },
   {
     "title": "flake",
     "description": "My NixOS dotfiles",
     "link": "https://github.com/kewin-y/flake",
-    "tags": ["nix", "dotfiles"]
+    "tags": ["nix", "dotfiles"],
+    "starred": false
   },
   {
     "title": "nvim-kewin",
     "description": "My Neovim config",
     "link": "https://github.com/kewin-y/nvim-kewin",
-    "tags": ["dotfiles", "nvim", "lua"]
+    "tags": ["dotfiles", "nvim", "lua"],
+    "starred": false
   },
   {
     "title": "Saving the world",
     "description": "I'm gonna save the world",
-    "tags": ["save", "world"]
+    "tags": ["save", "world"],
+    "starred": false
   }
 ]

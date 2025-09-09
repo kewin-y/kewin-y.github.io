@@ -1,11 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Link from "../components/Link.astro";
+import Project from "../components/Project.astro";
+import projects from "../data/projects.json";
 
 const links = {
     Github: "https://github.com/kewin-y",
     LinkedIn: "https://www.linkedin.com/in/kevin-yu-1a2531330/",
 };
+
+const starredProjects = projects
+    .filter((project) => project.starred)
+    .slice(0, 3);
 ---
 
 <Layout title="Kevin Yu">
@@ -26,11 +32,12 @@ const links = {
         <p>
             In my free time, I enjoy playing video games, reading, listening to
             music, and working out. I'm also getting into fishkeeping! It's a
-            super interesting hobby but my tank is currently filled with hydra 🥲.
+            super interesting hobby but my tank is currently filled with hydra
+            🥲.
         </p>
         <div>
             Check out my:
-            <ul class="flex flex-wrap gap-2">
+            <ul class="inline-flex flex-wrap gap-2">
                 {
                     Object.entries(links).map(([key, value]) => (
                         <li>
@@ -38,6 +45,14 @@ const links = {
                         </li>
                     ))
                 }
+            </ul>
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">
+                Starred Projects:
+            </h1>
+            <ul class="flex flex-col gap-5 md:grid grid-cols-2 gap-5">
+                {starredProjects.map((project) => <Project project={project} />)}
             </ul>
         </div>
     </div>
