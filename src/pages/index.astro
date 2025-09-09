@@ -49,10 +49,18 @@ const starredProjects = projects
         </div>
         <div>
             <h1 class="text-3xl font-bold border-black border-b-2 pb-5 mb-5">
-                Starred Projects:
+                Featured Projects
             </h1>
+            <p class="mb-5">
+                These are the projects that I am the most proud of. Check the
+                rest of them out over <Link text={"here"} href="/projects" />.
+            </p>
             <ul class="flex flex-col gap-5 md:grid grid-cols-2 gap-5">
-                {starredProjects.map((project) => <Project project={project} />)}
+                {
+                    starredProjects.map((project) => (
+                        <Project project={project} />
+                    ))
+                }
             </ul>
         </div>
     </div>
