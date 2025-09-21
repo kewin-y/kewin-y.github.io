@@ -1,0 +1,95 @@
+---
+title: "Minecraft Clone: Chapter 2"
+description: "Some decent progress on my Minecraft Clone"
+pubDate: "September 20 2025"
+---
+
+import { Image } from "astro:assets";
+import dirt_hills from "../../assets/images/blogs/dirt_hills.png";
+import nice_chunk from "../../assets/images/blogs/nice_chunk.png";
+import many_chunks from "../../assets/images/blogs/many_chunks.png";
+import Link from "../../components/Link.astro";
+
+# Minecraft Clone: Chapter 2
+
+Long time no see! Since my last devlog, I have implemented chunk generation, textures, and a bit of multithreading!
+
+## Textures
+
+The first thing that I did was implement textures. For the most part this was straightforward. The hardest was definitely reformatting my vertex data. Prior to implementing textures, my vertex data looked something like this:
+
+```cpp
+struct Block_Vertex {
+        glm::vec3 position;     // 12 Bytes
+        glm::vec3 normal;       // 12 Bytes
+        int block_type;         // 4 Bytes
+};
+```
+
+As you can see, a single vertex was already massive. Adding another field for UV coordinates would mean adding another 8 bytes! I needed to do some optimization .. Since vertex position is relative to the chunk, each position coordinate would only exist in the range of `[0, 32]`. In addition, it makes no sense for the block type to be represented by an integer. This is a hobby project, so I have no plans on having more than 255 block types. Thus, each position coordinate and block type would only need to take up a single byte, allowing them to be packed together as a single unsigned integer. Now, a block vertex looks like this:
+
+```
+struct Block_Vertex {
+        glm::vec3 normal;               // 12 Bytes
+        glm::vec2 uv;                   // 8 Bytes
+        unsigned int packed_coord_type; // 4 bytes
+};
+```
+
+On the CPU, the coordinates and block type are packed like so:
+
+```cpp
+unsigned int packed =
+        ((face_nz[j][0] + x) << 24u) |
+        ((face_nz[j][1] + y) << 16u) |
+        ((face_nz[j][2] + z) << 8u) | block_type;
+```
+
+And unpacking them in the shader:
+
+```
+uint a_x = (a_packed_coord_type >> 24u) & 0xFFu;
+uint a_y = (a_packed_coord_type >> 16u) & 0xFFu;
+uint a_z = (a_packed_coord_type >> 8u) & 0xFFu;
+uint a_type = a_packed_coord_type & 0xFFu;
+```
+
+Admittedly, this solution is still quite inefficient. In reality, each position coordinate would only take a maximum of 5 bits because they range in `[0, 32]`. Each coordinate of the normal has only three values that it can take, so storing a normal as a `glm::vec3` wasting a lot of space.
+
+Now, the appropriate UV coordinate of each vertex would be calculated on the CPU given its block type and local UV coordinate. Now, I finally had textures. I apologize for any lack of screenshots so far, but that's because it has been quite boring so far.
+
+## Map Generation
+
+I came up with a pretty simple algorithm for generating new chunks. Every time the camera crossed a chunk border, I would delete the old layer of chunks, generating a new layer in whichever direction the camera moved.
+
+### A Misadventure in Generative AI
+
+Implementing my algorithm was quite challenging. I could never get the chunks to generate how I wanted them to, and the debugging process was quite the nightmare. At that time, my algorithm was accounting for possibility of moving more than one chunk in a frame, which complicated the logic and introduced unnecessary loops. I should have recognized this and dumbed down my algorithm to only account for the possibility of moving one chunk at a time. Instead, I turned to my AI overlords, asking DeepSeek for help. Immediately, I was greeted with a dumbed down algorithm which only accounted for moving one chunk at a time. Seeing this, I implemented said algorithm, but I didn't copy DeepSeek's code word for word -- I wasn't about to put myself on the level of a vibecoder. I tested this new algorithm once, and immediately, it did what I wanted to.
+
+### Moral of the Story
+
+Looking back, I definitely would have been able to fix my code by myself. It was such a simple fix, which I completely disregarded beforehand. I must admit, I did think of the solution before, but I didn't implement it in fear of moving more than one chunk at a time. However, at that point in the project, such worries were completely unreasonable; moving at such speeds would require teleportation -- a feature I was not going to implement that early on. So what is the moral of the story? Don't make your code unnecessarily complicated. If it doesn't work, you're probably trying to do something ridiculous. Finally, don't try to rely on AI as a first-resort; you're probably smart enough to figure it out on your own.
+
+### Noise ..
+
+Now that new chunks were being generated, it was time to implement terrain generation. At first, I tried to read up on some papers in an attempt to implement Perlin Noise by myself. Eventually, I decided to rely on open-source libraries because such an endeavour would be more suited in a different project. I first tried out <Link text="libnoise" href="https://libnoise.sourceforge.net/" /> but I could not figure out how to link against it from within my Nix Shell. I decided to settle on <Link text="fastnoiselite" href="https://github.com/Auburn/FastNoiseLite" /> due to its portability and ease of use. This was a good choice, as I quickly had "beautiful" terrain ..
+
+<p align="center" >
+    <Image
+        src={dirt_hills}
+        alt="many chunks"
+        width="500"
+        height="300"
+    />
+</p>
+<div style="text-align: center;">
+    Dirt hills as far as the eye can see.
+</div>
+
+## Multithreading
+
+At this point, the engine was still super laggy. There was a noticeable freeze when crossing chunk borders due to the generation of new chunks. Out of all optimizations to implement, I decided to make chunk generation multithreaded. To be honest, this wasn't really that exciting. I didn't use any thread pooling because I am still relatively new to this topic. Instead, I opted for C++'s `future` header, using `std::async`. In the end, I was able to shave off a few milliseconds from chunk generation. It went from taking around ~0.1s to generate chunks without multithreading, to around ~0.01s with multithreading (I profiled this using various functions from the `chrono` header while using a render radius of 3 chunks).
+
+## Moving Forward ..
+
+ So this was what I was doing with my engine for the last couple of months. I've been quite busy with school and whatnot, so I think this is some decent progress. However, I'm afraid progress on this might slow down. I'm gonna be even more busy now with the fall semester; I have midterms in a week _and_ I have to apply for internships. Wish me luck! Thank you so much for reading this devlog. I hope you can join me for my next ones. :)
