@@ -9,30 +9,32 @@ const posts = (await getCollection("blogs")).sort(
 ---
 
 <Layout title="Kevin Yu | Blogs">
-    <h1 class="text-3xl font-bold border-b-2 border-black pb-5">
-        BLOGS<h1>
+    <h1 class="text-2xl font-bold border-b-1 border-black pb-5">
+        Blogs
+        <h1>
             <ul class="mt-5 flex flex-col gap-5">
                 {
                     posts.length > 0 ? (
                         posts.map((post) => (
                             <li class="border-black border-2 p-2 flex flex-col gap-2">
-                                <div class="flex justify-between">
+                                <div class="gap-2 flex flex-col md:flex-row justify-between">
                                     <a
                                         href={`/blogs/${post.id}`}
-                                        class="text-2xl font-bold hover:text-gray-400"
+                                        class="font-bold hover:text-gray-400 overflow-hidden truncate"
                                     >
-                                        {post.data.title.toUpperCase()}
+                                        {post.data.title}
                                     </a>
                                     <time
                                         datetime={post.data.pubDate.toISOString()}
                                     >
-                                        {post.data.pubDate
-                                            .toLocaleDateString("en-us", {
+                                        {post.data.pubDate.toLocaleDateString(
+                                            "en-us",
+                                            {
                                                 year: "numeric",
                                                 month: "short",
                                                 day: "numeric",
-                                            })
-                                            .toUpperCase()}
+                                            },
+                                        )}
                                     </time>
                                 </div>
                                 <p>{post.data.description}</p>

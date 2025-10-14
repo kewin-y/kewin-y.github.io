@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+import "@fontsource-variable/geist";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BaseHead from "../components/BaseHead.astro";
@@ -17,9 +19,12 @@ const { title } = Astro.props;
         <BaseHead title={title} />
         <ClientRouter />
     </head>
-    <body class="w-7/12 mx-auto flex flex-col h-[100vh] md:w-5/12 " transition:animate="fade">
+    <body
+        class="w-7/12 mx-auto flex flex-col h-[100vh] md:w-5/12"
+        transition:animate="fade"
+    >
         <Header />
-            <main class="my-5">
+        <main class="my-5">
             <slot />
         </main>
         <Footer />

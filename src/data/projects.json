@@ -1,9 +1,9 @@
 [
   {
-    "title": "Todo Good",
+    "title": "tdl",
     "description": "Obligatory Todo App",
-    "link": "https://github.com/kewin-y/todo-good",
-    "tags": ["ReactJS", "Python", "PostgreSQL"],
+    "link": "https://github.com/kewin-y/tdl",
+    "tags": ["ReactJS", "Supabase", "PostgreSQL"],
     "starred": true
   },
   {

@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../../tailwind.config.js";
+
+@theme {
+  --default-font-family: "Geist Variable", var(--font-sans);
+}
+
+@utility prose-black {
+  --tw-prose-body: black;
+  --tw-prose-headings: black;
+  --tw-prose-lead: black;
+  --tw-prose-links: black;
+  --tw-prose-bold: black;
+  --tw-prose-counters: black;
+  --tw-prose-bullets: black;
+  --tw-prose-hr: black;
+  --tw-prose-quotes: black;
+  --tw-prose-quote-borders: black;
+  --tw-prose-captions: black;
+  --tw-prose-code: black;
+  --tw-prose-pre-code: black;
+  --tw-prose-pre-bg: black;
+  --tw-prose-th-borders: black;
+  --tw-prose-td-borders: black;
+  --tw-prose-invert-body: black;
+  --tw-prose-invert-headings: white;
+  --tw-prose-invert-lead: black;
+  --tw-prose-invert-links: white;
+  --tw-prose-invert-bold: white;
+  --tw-prose-invert-counters: black;
+  --tw-prose-invert-bullets: black;
+  --tw-prose-invert-hr: black;
+  --tw-prose-invert-quotes: black;
+  --tw-prose-invert-quote-borders: black;
+  --tw-prose-invert-captions: black;
+  --tw-prose-invert-code: white;
+  --tw-prose-invert-pre-code: black;
+  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+  --tw-prose-invert-th-borders: black;
+  --tw-prose-invert-td-borders: black;
+}

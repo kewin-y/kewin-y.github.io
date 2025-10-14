@@ -1,13 +1,13 @@
 ---
-const headerButtons = ["blogs", "projects"];
+const headerButtons = ["Blogs", "Projects"];
 ---
 
 <header
-    class="bg-white w-full py-5 mx-auto top-0 sticky border-b-2 border-b-black text-sm md:text-base"
+    class="bg-white w-full py-5 mx-auto top-0 sticky border-b-1 border-b-black text-sm md:text-base"
 >
     <nav class="flex flex-col lg:flex-row justify-between">
         <div class="flex justify-between">
-            <a href="/" class="hover:text-gray-400">KEVIN YU</a>
+            <a href="/" class="hover:text-gray-400">Kevin Yu</a>
             <button
                 class="menu-btn font-bold ml-auto lg:hidden focus:outline-none"
             >
@@ -22,15 +22,15 @@ const headerButtons = ["blogs", "projects"];
                     headerButtons.map((button) => (
                         <li>
                             <a
-                                href={`/${button}`}
+                                href={`/${button.toLowerCase()}`}
                                 class:list={[
                                     "hover:text-gray-400",
-                                    Astro.url.pathname.includes(`/${button}`)
+                                    Astro.url.pathname.includes(`/${button.toLowerCase()}`)
                                         ? "text-gray-400"
                                         : "",
                                 ]}
                             >
-                                {button.toUpperCase()}
+                                {button}
                             </a>
                         </li>
                     ))

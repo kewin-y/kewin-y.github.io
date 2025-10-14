@@ -10,8 +10,6 @@ import nice_chunk from "../../assets/images/blogs/nice_chunk.png";
 import many_chunks from "../../assets/images/blogs/many_chunks.png";
 import Link from "../../components/Link.astro";
 
-# Minecraft Clone: Chapter 2
-
 Long time no see! Since my last devlog, I have implemented chunk generation, textures, and a bit of multithreading!
 
 ## Textures
@@ -28,7 +26,7 @@ struct Block_Vertex {
 
 As you can see, a single vertex was already massive. Adding another field for UV coordinates would mean adding another 8 bytes! I needed to do some optimization .. Since vertex position is relative to the chunk, each position coordinate would only exist in the range of `[0, 32]`. In addition, it makes no sense for the block type to be represented by an integer. This is a hobby project, so I have no plans on having more than 255 block types. Thus, each position coordinate and block type would only need to take up a single byte, allowing them to be packed together as a single unsigned integer. Now, a block vertex looks like this:
 
-```
+```cpp
 struct Block_Vertex {
         glm::vec3 normal;               // 12 Bytes
         glm::vec2 uv;                   // 8 Bytes
@@ -47,7 +45,7 @@ unsigned int packed =
 
 And unpacking them in the shader:
 
-```
+```glsl
 uint a_x = (a_packed_coord_type >> 24u) & 0xFFu;
 uint a_y = (a_packed_coord_type >> 16u) & 0xFFu;
 uint a_z = (a_packed_coord_type >> 8u) & 0xFFu;
@@ -56,7 +54,7 @@ uint a_type = a_packed_coord_type & 0xFFu;
 
 Admittedly, this solution is still quite inefficient. In reality, each position coordinate would only take a maximum of 5 bits because they range in `[0, 32]`. Each coordinate of the normal has only three values that it can take, so storing a normal as a `glm::vec3` wasting a lot of space.
 
-Now, the appropriate UV coordinate of each vertex would be calculated on the CPU given its block type and local UV coordinate. Now, I finally had textures. I apologize for any lack of screenshots so far, but that's because it has been quite boring so far.
+Now, the appropriate UV coordinate of each vertex would be calculated on the CPU given its block type and local UV coordinate. Now, I finally had textures. I apologize for any lack of screenshots so far, but that's because it has been quite boring.
 
 ## Map Generation
 
