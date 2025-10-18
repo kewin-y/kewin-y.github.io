@@ -4,6 +4,7 @@
 
 @theme {
   --default-font-family: "Geist Variable", var(--font-sans);
+  --font-mono: "Geist Mono Variable", monospace;
 }
 
 @utility prose-black {

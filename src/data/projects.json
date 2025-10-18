@@ -26,11 +26,5 @@
     "link": "https://github.com/kewin-y/nvim-kewin",
     "tags": ["dotfiles", "nvim", "lua"],
     "starred": false
-  },
-  {
-    "title": "Saving the world",
-    "description": "I'm gonna save the world",
-    "tags": ["save", "world"],
-    "starred": false
   }
 ]

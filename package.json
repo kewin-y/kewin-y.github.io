@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.7",
     "@fontsource-variable/geist": "^5.2.8",
+    "@fontsource-variable/geist-mono": "^5.2.7",
     "@tailwindcss/vite": "^4.1.14",
     "astro": "^5.14.4",
     "tailwindcss": "^4.1.14"
