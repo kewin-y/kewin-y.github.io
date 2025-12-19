@@ -8,10 +8,6 @@ const links = {
     Github: "https://github.com/kewin-y",
     LinkedIn: "https://www.linkedin.com/in/kewin-y",
 };
-
-const starredProjects = projects
-    .filter((project) => project.starred)
-    .slice(0, 3);
 ---
 
 <Layout title="Kevin Yu">
@@ -29,8 +25,7 @@ const starredProjects = projects
         </p>
         <p>
             In my free time, I mess around with aquariums and mechanical
-            keyboards. Eventually, I would like to design my own keyboard from
-            scratch.
+            keyboards.
         </p>
         <div>
             Check out my:
@@ -48,18 +43,10 @@ const starredProjects = projects
             <h1
                 class="text-2xl md:text-2xl font-bold border-black border-b-1 pb-5 mb-5"
             >
-                Featured Projects
+                Projects
             </h1>
-            <p class="mb-5">
-                These are the projects that I am the most proud of. Check the
-                rest of them out over <Link text={"here"} href="/projects" />.
-            </p>
             <ul class="flex flex-col gap-5 md:grid grid-cols-2 gap-5">
-                {
-                    starredProjects.map((project) => (
-                        <Project project={project} />
-                    ))
-                }
+                {projects.map((project) => <Project project={project} />)}
             </ul>
         </div>
     </div>

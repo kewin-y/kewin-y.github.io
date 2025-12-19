@@ -1,5 +1,5 @@
 ---
-const headerButtons = ["Blogs", "Projects"];
+const headerButtons = ["Blogs"];
 ---
 
 <header
@@ -25,7 +25,9 @@ const headerButtons = ["Blogs", "Projects"];
                                 href={`/${button.toLowerCase()}`}
                                 class:list={[
                                     "hover:text-gray-400",
-                                    Astro.url.pathname.includes(`/${button.toLowerCase()}`)
+                                    Astro.url.pathname.includes(
+                                        `/${button.toLowerCase()}`,
+                                    )
                                         ? "text-gray-400"
                                         : "",
                                 ]}
@@ -48,5 +50,5 @@ const headerButtons = ["Blogs", "Projects"];
         menuButton?.addEventListener("click", () => {
             menu?.classList.toggle("hidden");
         });
-    })
+    });
 </script>
