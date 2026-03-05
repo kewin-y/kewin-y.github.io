@@ -1,8 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Link from "../components/Link.astro";
-import Project from "../components/Project.astro";
-import projects from "../data/projects.json";
+import Layout from "@/layouts/Layout.astro";
+import Link from "@/components/Link.astro";
+import Project from "@/components/Project.astro";
+import projects from "@/content/projects.json";
 
 const links = {
     Github: "https://github.com/kewin-y",
@@ -11,7 +11,7 @@ const links = {
 ---
 
 <Layout title="Kevin Yu">
-    <h1 class="text-2xl font-bold border-black border-b-1 pb-5 mb-5">Hello!</h1>
+    <h1 class="text-2xl font-bold border-black border-b pb-5 mb-5">Hello!</h1>
     <div class="flex flex-col gap-5">
         <p>
             I am Kevin. I am an undergraduate student studying math and computer
@@ -41,11 +41,11 @@ const links = {
         </div>
         <div>
             <h1
-                class="text-2xl md:text-2xl font-bold border-black border-b-1 pb-5 mb-5"
+                class="text-2xl md:text-2xl font-bold border-black border-b pb-5 mb-5"
             >
                 Projects
             </h1>
-            <ul class="flex flex-col gap-5 md:grid grid-cols-2 gap-5">
+            <ul class="flex flex-col gap-5 md:grid grid-cols-2">
                 {projects.map((project) => <Project project={project} />)}
             </ul>
         </div>
