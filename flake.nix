@@ -1,34 +1,46 @@
 {
-  description = "My personal website";
+  description = "devshell for my personal website";
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-              nodejs_20
-              astro-language-server
-          ];
+  outputs = {nixpkgs, ...}: let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "x86_64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
+  in {
+    formatter = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        pkgs.alejandra
+    );
+    devShells = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        default = pkgs.mkShell {
+          packages = builtins.attrValues {
+            inherit
+              (pkgs)
+              nodejs
+              pnpm
+              prettierd
+              typescript-language-server
+              tailwindcss-language-server
+              ;
+          };
 
           shellHook = ''
             export SHELL='${pkgs.mksh}/bin/mksh'
           '';
         };
-      };
-    };
+      }
+    );
+  };
 }
-
 
