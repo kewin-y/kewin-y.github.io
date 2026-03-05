@@ -35,10 +35,6 @@
                             astro-language-server
                             ;
                     };
-
-                    shellHook = ''
-                        export SHELL='${pkgs.mksh}/bin/mksh'
-                    '';
                 };
             }
         );
