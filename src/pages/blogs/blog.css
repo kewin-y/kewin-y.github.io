@@ -1,0 +1,75 @@
+@reference "tailwindcss";
+
+.blog-content {
+    @apply max-w-none space-y-6;
+}
+
+.blog-content h1 {
+    @apply text-2xl font-bold text-black;
+}
+
+.blog-content h2 {
+    @apply text-xl font-bold text-black;
+}
+
+.blog-content h3 {
+    @apply text-lg font-bold text-black;
+}
+
+.blog-content p {
+    @apply text-base text-black;
+}
+
+.blog-content a {
+    @apply text-black underline underline-offset-2;
+}
+
+.blog-content a:hover {
+    @apply decoration-2;
+}
+
+.blog-content ul,
+.blog-content ol {
+    @apply mb-6 pl-6;
+}
+
+.blog-content li {
+    @apply text-base text-black mb-2;
+}
+
+.blog-content ul li {
+    @apply list-disc;
+}
+
+.blog-content ol li {
+    @apply list-decimal;
+}
+
+.blog-content blockquote {
+    @apply border-l-3 border-black pl-4 my-4 italic text-gray-700;
+}
+
+.blog-content code {
+    @apply font-mono text-sm bg-gray-100 px-1.5 py-0.5 rounded;
+}
+
+.blog-content pre {
+    @apply bg-gray-900 p-4 rounded-lg overflow-x-auto mb-6;
+}
+
+.blog-content pre code {
+    @apply bg-transparent p-0 text-gray-100 text-sm;
+}
+
+.blog-content hr {
+    @apply border-t border-black my-8;
+}
+
+.blog-content strong {
+    @apply font-bold text-black;
+}
+
+.blog-content em {
+    @apply italic;
+}
+
