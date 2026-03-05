@@ -3,5 +3,4 @@ export type ProjectType = {
     description: string;
     link?: string;
     tags: string[];
-    starred: boolean;
 };
