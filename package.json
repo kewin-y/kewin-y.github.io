@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.7",
