@@ -2,10 +2,10 @@
 const headerButtons = ["Blogs"];
 ---
 
-<header
-    class="bg-white w-full py-5 mx-auto top-0 sticky border-b border-b-black text-sm md:text-base"
->
-    <nav class="flex flex-col lg:flex-row justify-between">
+<header class="w-full flex">
+    <nav
+        class="bg-gray-100 rounded-md my-5 p-5 mx-auto max-w-2xl w-full flex flex-col lg:flex-row justify-between"
+    >
         <div class="flex justify-between">
             <a href="/" class="hover:text-gray-400">Kevin Yu</a>
             <button
@@ -21,19 +21,7 @@ const headerButtons = ["Blogs"];
                 {
                     headerButtons.map((button) => (
                         <li>
-                            <a
-                                href={`/${button.toLowerCase()}`}
-                                class:list={[
-                                    "hover:text-gray-400",
-                                    Astro.url.pathname.includes(
-                                        `/${button.toLowerCase()}`,
-                                    )
-                                        ? "text-gray-400"
-                                        : "",
-                                ]}
-                            >
-                                {button}
-                            </a>
+                            <a href={`/${button.toLowerCase()}`}>{button}</a>
                         </li>
                     ))
                 }

@@ -9,20 +9,15 @@ type Props = {
 const { project } = Astro.props;
 ---
 
-<li class="border-black border p-2 flex flex-col gap-2">
+<li
+    class="bg-gray-100 rounded-md p-5 md:p-5 flex flex-col gap-2 hover:bg-gray-200 transition-all duration-200"
+>
     <h1 class="font-bold">{project.title}</h1>
     <p>{project.description}</p>
-    {
-        project.link ? (
-            <Link text="See More" href={project.link} />
-        ) : (
-            <p class="text-gray-400">no link</p>
-        )
-    }
-    <ul class="flex flex-wrap gap-4">
+    <ul class="flex flex-wrap gap-2 mt-2">
         {
             project.tags.map((tag) => (
-                <li class="border-black border px-2 font-mono text-sm">
+                <li class="rounded-md border border-gray-300 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-gray-600">
                     {tag}
                 </li>
             ))
