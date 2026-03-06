@@ -20,19 +20,33 @@ import "./blog.css";
 ---
 
 <Layout title=`Kevin Yu | ${post.data.title}`>
-    <div class="border-b-black border-b gap-4 flex flex-col pb-5 mb-5">
-        <h1 class="text-2xl font-bold">{post.data.title}</h1>
-        <time datetime={post.data.pubDate.toISOString()}>
-            {
-                post.data.pubDate.toLocaleDateString("en-us", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                })
-            }
-        </time>
+    <div class="flex my-10">
+        <div class="mx-5 md:mx-auto max-w-2xl w-full">
+            <div
+                class="gap-5 flex flex-col pb-5 border-b border-gray-200 mb-5"
+            >
+                <div class="justify-between flex items-center">
+                    <h1 class="font-bold">{post.data.title}</h1>
+                    <a
+                        href="/blogs"
+                        class="px-3 py-1 hover:bg-gray-100 transition-all duration-200 rounded-md"
+                        >Back to Blogs</a
+                    >
+                </div>
+                <span>{post.data.description}</span>
+                <time datetime={post.data.pubDate.toISOString()}>
+                    {
+                        post.data.pubDate.toLocaleDateString("en-us", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                        })
+                    }
+                </time>
+            </div>
+            <article class="blog-content">
+                <Content />
+            </article>
+        </div>
     </div>
-    <article class="blog-content">
-        <Content />
-    </article>
 </Layout>

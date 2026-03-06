@@ -4,10 +4,14 @@ const headerButtons = ["Blogs"];
 
 <header class="w-full flex">
     <nav
-        class="bg-gray-100 rounded-md my-5 p-5 mx-auto max-w-2xl w-full flex flex-col lg:flex-row justify-between"
+        class="my-5 mx-auto max-w-2xl w-full flex flex-col lg:flex-row justify-between items-center"
     >
-        <div class="flex justify-between">
-            <a href="/" class="hover:text-gray-400">Kevin Yu</a>
+        <div class="flex justify-between items-center">
+            <a
+                href="/"
+                class="p-2 hover:bg-gray-100 transition-all duration-200 rounded-sm"
+                >Kevin Yu</a
+            >
             <button
                 class="menu-btn font-bold ml-auto lg:hidden focus:outline-none"
             >
@@ -21,7 +25,12 @@ const headerButtons = ["Blogs"];
                 {
                     headerButtons.map((button) => (
                         <li>
-                            <a href={`/${button.toLowerCase()}`}>{button}</a>
+                            <a
+                                href={`/${button.toLowerCase()}`}
+                                class="p-2 hover:bg-gray-200 transition-all duration-200 rounded-sm"
+                            >
+                                {button}
+                            </a>
                         </li>
                     ))
                 }

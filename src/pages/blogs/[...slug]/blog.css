@@ -1,19 +1,19 @@
 @reference "tailwindcss";
 
 .blog-content {
-    @apply max-w-none space-y-6;
+    @apply max-w-none space-y-5;
 }
 
 .blog-content h1 {
-    @apply text-2xl font-bold text-black;
+    @apply font-bold text-black;
 }
 
 .blog-content h2 {
-    @apply text-xl font-bold text-black;
+    @apply font-bold text-black;
 }
 
 .blog-content h3 {
-    @apply text-lg font-bold text-black;
+    @apply font-bold text-black;
 }
 
 .blog-content p {
@@ -30,7 +30,7 @@
 
 .blog-content ul,
 .blog-content ol {
-    @apply mb-6 pl-6;
+    @apply mb-5 pl-5;
 }
 
 .blog-content li {
