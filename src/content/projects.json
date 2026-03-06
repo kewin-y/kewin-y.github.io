@@ -1,7 +1,7 @@
 [
   {
     "title": "event-wizard",
-    "description": "create and view events; made for an internship",
+    "description": "Create and view events; made for an internship",
     "link": "https://github.com/kewin-y/event-wizard",
     "tags": ["Next.js", "Convex"]
   },

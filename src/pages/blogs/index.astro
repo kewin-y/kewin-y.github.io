@@ -27,7 +27,7 @@ const posts = (await getCollection("blogs")).sort(
                         posts.map((post) => (
                             <a
                                 href={`/blogs/${post.id}`}
-                                class="bg-gray-100 rounded-md p-5 hover:bg-gray-200 transition-all duration-200 flex flex-col gap-2"
+                                class="border-gray-300 border bg-gray-100 rounded-md p-5 hover:bg-gray-200 transition-all duration-200 flex flex-col gap-2"
                             >
                                 <div class="gap-2 flex flex-col md:flex-row justify-between">
                                     <span class="font-bold overflow-hidden truncate">
