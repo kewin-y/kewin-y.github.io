@@ -12,7 +12,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: "shiki",
     shikiConfig: {
-      theme: "material-theme-lighter",
+      theme: "github-light",
       wrap: true,
     },
   },

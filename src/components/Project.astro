@@ -1,6 +1,4 @@
 ---
-import { type ProjectType } from "../types.ts";
-
 type Props = {
   project: {
     title: string;
@@ -16,7 +14,7 @@ const Tag = project.link ? "a" : "div";
 
 <Tag
   class:list={[
-    "border-gray-300 border bg-gray-100 rounded-md p-5 flex flex-col gap-2 hover:bg-gray-200 transition-all duration-200",
+    "border-neutral-300 border bg-neutral-100 rounded-md p-5 flex flex-col gap-2 hover:bg-neutral-200 transition-all duration-200",
     project.link ? "cursor-pointer" : "cursor-default",
   ]}
   {...project.link
@@ -28,7 +26,7 @@ const Tag = project.link ? "a" : "div";
   <ul class="flex flex-wrap gap-2 mt-2">
     {
       project.tags.map((tag) => (
-        <li class="rounded-md border border-gray-300 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+        <li class="rounded-md border border-neutral-300 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
           {tag}
         </li>
       ))

@@ -21,6 +21,6 @@
     "title": "flake",
     "description": "My NixOS dotfiles; no home-manager",
     "link": "https://github.com/kewin-y/flake",
-    "tags": ["nix", "NixOS", "dotfiles"]
+    "tags": ["Nix", "NixOS", "Dotfiles"]
   }
 ]
