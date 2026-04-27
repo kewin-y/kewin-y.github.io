@@ -3,59 +3,54 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blogs")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
 <Layout title="Kevin Yu | Blogs">
-    <div class="flex my-10">
-        <div class="mx-5 md:mx-auto max-w-2xl w-full">
-            <div class="space-y-5 mb-15">
-                <div class="flex justify-between items-center">
-                    <h1 class="font-bold">Kevin's Blogs</h1>
-                    <a
-                        href="/"
-                        class="px-3 py-2 hover:bg-gray-100 transition-all duration-200 rounded-md"
-                        >Back to Home</a
-                    >
-                </div>
-                <span class="motd">Cool stuff here</span>
-            </div>
-            <div class="mt-5 flex flex-col gap-5">
-                {
-                    posts.length > 0 ? (
-                        posts.map((post) => (
-                            <a
-                                href={`/blogs/${post.id}`}
-                                class="border-gray-300 border bg-gray-100 rounded-md p-5 hover:bg-gray-200 transition-all duration-200 flex flex-col gap-2"
-                            >
-                                <div class="gap-2 flex flex-col md:flex-row justify-between">
-                                    <span class="font-bold overflow-hidden truncate">
-                                        {post.data.title}
-                                    </span>
-                                    <time
-                                        datetime={post.data.pubDate.toISOString()}
-                                    >
-                                        {post.data.pubDate.toLocaleDateString(
-                                            "en-us",
-                                            {
-                                                year: "numeric",
-                                                month: "short",
-                                                day: "numeric",
-                                            },
-                                        )}
-                                    </time>
-                                </div>
-                                <div>
-                                    <span>{post.data.description}</span>
-                                </div>
-                            </a>
-                        ))
-                    ) : (
-                        <p>Nothing here ...</p>
-                    )
-                }
-            </div>
+  <div class="flex my-10">
+    <div class="mx-5 md:mx-auto max-w-2xl w-full">
+      <div class="space-y-5 mb-15">
+        <div class="flex justify-between items-center">
+          <h1 class="font-bold">Kevin's Blogs</h1>
+          <a
+            href="/"
+            class="px-3 py-2 hover:bg-gray-100 transition-all duration-200 rounded-md"
+            >Back to Home</a
+          >
         </div>
+        <span class="motd">Cool stuff here</span>
+      </div>
+      <div class="mt-5 flex flex-col gap-5">
+        {
+          posts.length > 0 ? (
+            posts.map((post) => (
+              <a
+                href={`/blogs/${post.id}`}
+                class="border-gray-300 border bg-gray-100 rounded-md p-5 hover:bg-gray-200 transition-all duration-200 flex flex-col gap-2"
+              >
+                <div class="gap-2 flex flex-col md:flex-row justify-between">
+                  <span class="font-bold overflow-hidden truncate">
+                    {post.data.title}
+                  </span>
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("en-us", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+                <div>
+                  <span>{post.data.description}</span>
+                </div>
+              </a>
+            ))
+          ) : (
+            <p>Nothing here ...</p>
+          )
+        }
+      </div>
     </div>
+  </div>
 </Layout>

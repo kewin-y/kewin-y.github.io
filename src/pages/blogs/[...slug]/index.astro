@@ -4,11 +4,11 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 
 export async function getStaticPaths() {
-    const posts = await getCollection("blogs");
-    return posts.map((post) => ({
-        params: { slug: post.id },
-        props: { post },
-    }));
+  const posts = await getCollection("blogs");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
 }
 
 type Props = { post: CollectionEntry<"blogs"> };
@@ -20,33 +20,31 @@ import "./blog.css";
 ---
 
 <Layout title=`Kevin Yu | ${post.data.title}`>
-    <div class="flex my-10">
-        <div class="mx-5 md:mx-auto max-w-2xl w-full">
-            <div
-                class="gap-5 flex flex-col pb-5 mb-15"
-            >
-                <div class="justify-between flex items-center">
-                    <h1 class="font-bold">{post.data.title}</h1>
-                    <a
-                        href="/blogs"
-                        class="px-3 py-2 hover:bg-gray-100 transition-all duration-200 rounded-md"
-                        >Back to Blogs</a
-                    >
-                </div>
-                <span>{post.data.description}</span>
-                <time datetime={post.data.pubDate.toISOString()}>
-                    {
-                        post.data.pubDate.toLocaleDateString("en-us", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                        })
-                    }
-                </time>
-            </div>
-            <article class="blog-content">
-                <Content />
-            </article>
+  <div class="flex my-10">
+    <div class="mx-5 md:mx-auto max-w-2xl w-full">
+      <div class="gap-5 flex flex-col pb-5 mb-15">
+        <div class="justify-between flex items-center">
+          <h1 class="font-bold">{post.data.title}</h1>
+          <a
+            href="/blogs"
+            class="px-3 py-2 hover:bg-gray-100 transition-all duration-200 rounded-md"
+            >Back to Blogs</a
+          >
         </div>
+        <span>{post.data.description}</span>
+        <time datetime={post.data.pubDate.toISOString()}>
+          {
+            post.data.pubDate.toLocaleDateString("en-us", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })
+          }
+        </time>
+      </div>
+      <article class="blog-content">
+        <Content />
+      </article>
     </div>
+  </div>
 </Layout>

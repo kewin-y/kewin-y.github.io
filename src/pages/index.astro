@@ -5,57 +5,51 @@ import Project from "@/components/Project.astro";
 import projects from "@/content/projects.json";
 
 const links = {
-    Github: "https://github.com/kewin-y",
-    LinkedIn: "https://www.linkedin.com/in/kewin-y",
-    Blogs: "/blogs",
+  Github: "https://github.com/kewin-y",
+  LinkedIn: "https://www.linkedin.com/in/kewin-y",
+  Blogs: "/blogs",
 };
 ---
 
 <Layout title="Kevin Yu">
-    <div
-        class="flex flex-col min-h-screen mx-auto justify-center items-center px-4 md:px-0"
-    >
-        <div class="my-10 md:my-0 max-w-2xl w-full">
-            <h1 class="font-bold pb-5">
-                Kevin Yu
-            </h1>
-            <div class="flex flex-col gap-5">
-                <p>
-                    I am an undergraduate student studying math and
-                    computer science at the University of Toronto.
-                </p>
-                <p>
-                    I like using Neovim and NixOS. My favourite programming
-                    languages are C, C++, and TypeScript, but I want to learn
-                    Rust and get better at Python.
-                </p>
-                <p>
-                    In my free time, I mess around with aquariums and mechanical
-                    keyboards.
-                </p>
-                <div>
-                    Check out my:
-                    <ul class="inline-flex flex-wrap gap-2">
-                        {
-                            Object.entries(links).map(([key, value]) => (
-                                <li>
-                                    <Link text={key} href={value} />
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
-                <div>
-                    <h1 class="font-bold mb-5">Projects</h1>
-                    <div class="flex flex-col gap-5 md:grid grid-cols-2">
-                        {
-                            projects.map((project) => (
-                                <Project project={project} />
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
+  <div
+    class="flex flex-col min-h-screen mx-auto justify-center items-center px-4 md:px-0"
+  >
+    <div class="my-10 md:my-0 max-w-2xl w-full">
+      <h1 class="font-bold pb-5">Kevin Yu</h1>
+      <div class="flex flex-col gap-5">
+        <p>
+          I am an undergraduate student studying math and computer science at
+          the University of Toronto.
+        </p>
+        <p>
+          I like using Neovim and NixOS. My favourite programming languages are
+          C, C++, and TypeScript, but I want to learn Rust and get better at
+          Python.
+        </p>
+        <p>
+          In my free time, I mess around with aquariums and mechanical
+          keyboards.
+        </p>
+        <div>
+          Check out my:
+          <ul class="inline-flex flex-wrap gap-2">
+            {
+              Object.entries(links).map(([key, value]) => (
+                <li>
+                  <Link text={key} href={value} />
+                </li>
+              ))
+            }
+          </ul>
         </div>
+        <div>
+          <h1 class="font-bold mb-5">Projects</h1>
+          <div class="flex flex-col gap-5 md:grid grid-cols-2">
+            {projects.map((project) => <Project project={project} />)}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </Layout>

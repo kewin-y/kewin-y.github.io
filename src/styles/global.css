@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-    --default-font-family: "Inter Tight Variable", var(--font-sans);
-    --font-mono: "IBM Plex Mono", monospace;
+  --default-font-family: "Inter Tight Variable", var(--font-sans);
+  --font-mono: "IBM Plex Mono", monospace;
 }
-
