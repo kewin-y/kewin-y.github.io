@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Link from "@/components/Link.astro";
-import Project from "@/components/Project.astro";
 import projects from "@/content/projects.json";
 
 const links = {
@@ -16,16 +15,21 @@ const links = {
     class="flex flex-col min-h-screen mx-auto justify-center items-center px-4 md:px-0"
   >
     <div class="my-10 md:my-0 max-w-2xl w-full">
-      <h1 class="font-bold pb-5">Kevin Yu</h1>
+      <div class="flex pb-5">
+        <h1 class="z-1000 font-bold">Kevin Yu</h1>
+        <span class="ml-auto font-cursive text-2xl text-black/20"
+          >all is well</span
+        >
+      </div>
       <div class="flex flex-col gap-5">
         <p>
           I am an undergraduate student studying math and computer science at
           the University of Toronto.
         </p>
         <p>
-          I like using Neovim and NixOS. My favourite programming languages are
-          C, C++, and TypeScript, but I want to learn Rust and get better at
-          Python.
+          My interests lie in machine learning and graphics programming, and I
+          am currently interning as a full-stack web developer at
+          <Link href="https://www.dataonthespot.com/" text="DOTS" />.
         </p>
         <p>
           In my free time, I mess around with aquariums and listen to music.
@@ -44,9 +48,35 @@ const links = {
         </div>
         <div>
           <h1 class="font-bold mb-5">Projects</h1>
-          <div class="flex flex-col gap-5 md:grid grid-cols-2">
-            {projects.map((project) => <Project project={project} />)}
-          </div>
+          <ul class="flex flex-col gap-5">
+            {
+              projects.map((project) => {
+                return (
+                  <li>
+                    <div class="flex w-full">
+                      <p>
+                        {project.link ? (
+                          <Link href={project.link} text={project.title} />
+                        ) : (
+                          <span>{project.title} </span>
+                        )}{" "}
+                        — {project.description}
+                      </p>
+                      {project.tags && project.tags.length > 0 && (
+                        <ul class="flex gap-2 ml-auto">
+                          {project.tags.map((tag) => (
+                            <li class="rounded-md border border-neutral-300 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+                );
+              })
+            }
+          </ul>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.3.7",
     "@fontsource-variable/inter-tight": "^5.2.7",
+    "@fontsource/great-vibes": "^5.2.8",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@tailwindcss/vite": "^4.1.14",
     "astro": "^5.14.4",
