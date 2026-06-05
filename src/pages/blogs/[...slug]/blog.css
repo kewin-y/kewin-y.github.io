@@ -21,11 +21,11 @@
 }
 
 .blog-content a {
-  @apply text-black underline underline-offset-2;
+  @apply underline text-neutral-600;
 }
 
 .blog-content a:hover {
-  @apply decoration-2;
+  @apply text-neutral-400;
 }
 
 .blog-content ul,
