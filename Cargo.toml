@@ -1,0 +1,10 @@
+[package]
+name = "pages"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+pulldown-cmark = "0.13.4"
+maud = "0.27.0"
+anyhow = "1.0.102"
+ammonia = "4.1.2"
