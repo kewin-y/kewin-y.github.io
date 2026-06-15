@@ -1,7 +1,7 @@
 ---
 title: "Goodbye World"
 description: "Hey"
-date: "Dec 12 2025"
+date: "2026-06-14"
 ---
 
 Goodbye
