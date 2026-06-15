@@ -23,13 +23,13 @@ pub fn blog(frontmatter: &Frontmatter, content: Markup) -> Markup {
             div class="frontmatter" {
                 div class="title"{
                     h1 {(&frontmatter.title)}
-                    a href="/" { "Back to Index" }
+                    a href="/" { "Back" }
                 }
                 p { (&frontmatter.date) }
                 em class="description" { (&frontmatter.description)}
 
             }
-            div { (content) }
+            div class="content" { (content) }
         },
     )
 }

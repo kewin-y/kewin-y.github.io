@@ -9,6 +9,7 @@
   border: 0 solid currentColor
 }
 
+/* Global Styles */
 html {
 	font-size: 16px;
 	line-height: 1.5
@@ -39,7 +40,7 @@ ul,
 ol,
 blockquote,
 pre {
-	margin-top: 0;
+	margin: 0 0 var(--spacing);
 	font-size: inherit
 }
 
@@ -52,23 +53,21 @@ h6 {
 	font-weight: 700
 }
 
-p,
-ul,
-ol,
-blockquote,
-pre {
-	margin-bottom: var(--spacing);
+li {
+  margin-bottom: 0.5rem;
 }
 
 a {
-	color: #000;
+	color: #808080;
 	text-decoration: underline
+  margin-top: 0;
 }
 
 .intro p:last-child {
   margin-bottom: 0;
 }
 
+/* Page-specific styles */
 .blog-links ul,
 .projects ul {
   padding: 0;
@@ -101,6 +100,6 @@ a {
 	justify-content: space-between
 }
 
-.frontmatter > * {
+.frontmatter * {
 	margin-bottom: 0
 }

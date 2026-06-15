@@ -18,3 +18,5 @@ Here are a list of things I need to clean:
 - My computer (outlined in red)
 - My toys
 - My books
+
+Thanks for reading.
