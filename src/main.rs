@@ -1,14 +1,15 @@
+mod frontmatter;
+mod site;
+mod templates;
+
 use std::{
     fs,
     path::{Path, PathBuf},
 };
 
-mod frontmatter;
-mod site;
-mod templates;
-
 const CONTENT_DIR: &str = "content";
 const OUTPUT_DIR: &str = "output";
+const PUBLIC_DIR: &str = "public";
 
 pub fn to_blog_output_file(path: &PathBuf) -> PathBuf {
     let remainder = path.strip_prefix(CONTENT_DIR).unwrap_or(Path::new(path));
@@ -46,7 +47,7 @@ fn write_all_blogs() -> anyhow::Result<Vec<site::BlogLink>> {
                 continue;
             }
         };
-        let blog = site::build_blog(&frontmatter.title, &markdown);
+        let blog = site::build_blog(&frontmatter, &markdown);
         let output_file = to_blog_output_file(&md_file);
 
         let href = output_file
@@ -70,6 +71,44 @@ fn write_index(index: maud::PreEscaped<String>) -> anyhow::Result<()> {
     Ok(())
 }
 
+fn copy_public_files() -> anyhow::Result<()> {
+    // Copy index.css
+    let index_css_path = Path::new(PUBLIC_DIR).join("index.css");
+    let index_css_out_path = Path::new(OUTPUT_DIR).join("index.css");
+    let _ = fs::copy(index_css_path, index_css_out_path)?;
+
+    // TODO: Copy images
+    let images_dir = Path::new(PUBLIC_DIR).join("images");
+    let images_out_dir = Path::new(OUTPUT_DIR).join("images");
+
+    let image_files: Vec<PathBuf> = fs::read_dir(images_dir)?
+        .flatten()
+        .filter_map(|e| {
+            if e.path().is_file()
+                && e.path()
+                    .extension()
+                    .map(|ext| ext == "png" || ext == "jpg")
+                    .unwrap_or(false)
+            {
+                Some(e.path())
+            } else {
+                None
+            }
+        })
+        .collect();
+
+    fs::create_dir(&images_out_dir)?;
+
+    for image_file in &image_files {
+        if let Some(image_file_name) = image_file.file_name() {
+            let output_file = images_out_dir.join(image_file_name);
+            let _ = fs::copy(image_file, output_file)?;
+        }
+    }
+
+    Ok(())
+}
+
 fn main() -> anyhow::Result<()> {
     if Path::is_dir(Path::new(OUTPUT_DIR)) {
         eprintln!("{} already exists. Removing ...", OUTPUT_DIR);
@@ -78,8 +117,9 @@ fn main() -> anyhow::Result<()> {
 
     fs::create_dir(OUTPUT_DIR)?;
 
-    let blogs = write_all_blogs()?;
+    copy_public_files()?;
 
+    let blogs = write_all_blogs()?;
     write_index(site::build_index("Kevin Yu", blogs))?;
 
     Ok(())
