@@ -26,6 +26,7 @@
               rustfmt
               clippy
               rust-analyzer
+              miniserve
               ;
           };
 
