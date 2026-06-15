@@ -16,16 +16,20 @@ pub fn page(page_title: &str, body: Markup) -> Markup {
     }
 }
 
-pub fn blog(frontmatter: &Frontmatter, body: Markup) -> Markup {
+pub fn blog(frontmatter: &Frontmatter, content: Markup) -> Markup {
     page(
         &frontmatter.title,
         html! {
-            h1 {(&frontmatter.title)}
-            div {
-                span { (&frontmatter.description)}
-                span { (&frontmatter.date) }
+            div class="frontmatter" {
+                div class="title"{
+                    h1 {(&frontmatter.title)}
+                    a href="/" { "Back to Index" }
+                }
+                p { (&frontmatter.date) }
+                em class="description" { (&frontmatter.description)}
+
             }
-            (body)
+            div class="content" { (content) }
         },
     )
 }

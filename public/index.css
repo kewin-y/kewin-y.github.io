@@ -1,9 +1,78 @@
+:root {
+  --spacing: 1.5rem;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border: 0 solid currentColor
+}
+
 html {
-  font-size: 16px;
+	font-size: 16px;
+	line-height: 1.5
 }
 
-body,
-body * {
-  font-size: 16px;
+body {
+	max-width: 42rem;
+	margin: 2.5rem auto;
+	padding: 0 var(--spacing);
+	font-size: 1rem;
+	line-height: inherit
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+blockquote,
+pre {
+	margin-top: 0;
+	font-size: inherit
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 700
+}
+
+p,
+ul,
+ol,
+blockquote,
+pre
+li {
+	margin-bottom: var(--spacing);
+}
+
+a {
+	color: #000;
+	text-decoration: underline
+}
+
+.frontmatter {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing);
+	margin-bottom: var(--spacing);
+}
+
+.frontmatter > .title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between
+}
+
+.frontmatter > * {
+	margin-bottom: 0
+}
