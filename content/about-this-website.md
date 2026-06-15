@@ -29,4 +29,9 @@ Some of the code was written with the help of AI.
 - AI was used to copy over some of the styling from my old personal site. It has since been heavily modified by hand.
 - I used AI to aid me in learning Rust syntax. I learn best from example, so this was the most efficient way. In a perfect world, I would be fully relying on Stack Overflow. Apart from that, all the Rust code was written by hand.
 
-I used just enough AI so that the experience wasn't sluggish. If I had used it any higher magnitude, I would have developed AI psychosis.
+I used just enough AI so that the experience wasn't sluggish. Any more, and I would have developed AI psychosis.
+
+## Acknowledgements
+
+- [sioodmy](https://github.com/sioodmy/sioodmy.github.io): How to use Nix in Github Actions
+- [namishh](https://github.com/namishh/com): Much better personal website written in Rust
