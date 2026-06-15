@@ -22,6 +22,12 @@ body {
 	line-height: inherit
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 h1,
 h2,
 h3,
@@ -50,14 +56,36 @@ p,
 ul,
 ol,
 blockquote,
-pre
-li {
+pre {
 	margin-bottom: var(--spacing);
 }
 
 a {
 	color: #000;
 	text-decoration: underline
+}
+
+.intro p:last-child {
+  margin-bottom: 0;
+}
+
+.blog-links ul,
+.projects ul {
+  padding: 0;
+  margin: 0;
+}
+
+.blog-links li,
+.projects li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.intro,
+.projects {
+  margin-bottom: calc(var(--spacing) * 2);
 }
 
 .frontmatter {

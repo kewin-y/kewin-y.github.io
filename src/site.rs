@@ -1,6 +1,6 @@
-use maud::{PreEscaped, html};
-use crate::templates;
 use crate::frontmatter::Frontmatter;
+use crate::templates;
+use maud::{PreEscaped, html};
 
 pub struct BlogLink {
     pub title: String,
@@ -21,16 +21,16 @@ pub fn build_blog(frontmatter: &Frontmatter, markdown: &str) -> PreEscaped<Strin
 }
 
 pub fn build_index(title: &str, blog_links: Vec<BlogLink>) -> PreEscaped<String> {
-    templates::page(
+    templates::index(
         title,
         html! {
             ul {
                 @for link in &blog_links {
                     li {
                         a href=(link.href) {
-                            span { (link.title) }
-                            span { (link.date) }
+                            (link.title)
                         }
+                        span { (link.date) }
                     }
                 }
             }
