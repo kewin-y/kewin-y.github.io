@@ -22,7 +22,8 @@ jobs:
         run: nix build
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
-        path: result/public
+        with:
+          path: result/public
 
   deploy:
     needs: build
