@@ -7,6 +7,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::site::Blog;
+
 const CONTENT_DIR: &str = "content";
 const OUTPUT_DIR: &str = "output";
 const PUBLIC_DIR: &str = "public";
@@ -18,7 +20,7 @@ pub fn to_blog_output_file(path: &PathBuf) -> PathBuf {
     output_file
 }
 
-fn write_all_blogs() -> anyhow::Result<Vec<site::BlogLink>> {
+fn write_all_blogs() -> anyhow::Result<Vec<Blog>> {
     let md_files: Vec<PathBuf> = fs::read_dir(CONTENT_DIR)?
         .flatten()
         .filter_map(|e| {
@@ -33,7 +35,7 @@ fn write_all_blogs() -> anyhow::Result<Vec<site::BlogLink>> {
         })
         .collect();
 
-    let mut blogs: Vec<site::BlogLink> = Vec::new();
+    let mut blogs: Vec<Blog> = Vec::new();
 
     for md_file in md_files {
         let markdown = fs::read_to_string(&md_file)?;
@@ -57,10 +59,10 @@ fn write_all_blogs() -> anyhow::Result<Vec<site::BlogLink>> {
 
         fs::write(output_file, blog.into_string())?;
 
-        let frontmatter::Frontmatter { title, date, .. } = frontmatter;
-
-        blogs.push(site::BlogLink { title, date, href });
+        blogs.push(Blog { frontmatter, href });
     }
+
+    blogs.sort_by(|a, b| b.frontmatter.date.cmp(&a.frontmatter.date));
 
     Ok(blogs)
 }

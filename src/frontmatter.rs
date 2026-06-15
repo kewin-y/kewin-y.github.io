@@ -1,10 +1,11 @@
+use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Frontmatter {
     pub title: String,
     pub description: String,
-    pub date: String,
+    pub date: NaiveDate,
 }
 
 pub fn parse_frontmatter(markdown: &str) -> Option<Frontmatter> {

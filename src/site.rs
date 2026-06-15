@@ -2,9 +2,8 @@ use crate::frontmatter::Frontmatter;
 use crate::templates;
 use maud::{PreEscaped, html};
 
-pub struct BlogLink {
-    pub title: String,
-    pub date: String,
+pub struct Blog {
+    pub frontmatter: Frontmatter,
     pub href: String,
 }
 
@@ -20,17 +19,18 @@ pub fn build_blog(frontmatter: &Frontmatter, markdown: &str) -> PreEscaped<Strin
     page
 }
 
-pub fn build_index(title: &str, blog_links: Vec<BlogLink>) -> PreEscaped<String> {
+pub fn build_index(title: &str, blogs: Vec<Blog>) -> PreEscaped<String> {
     templates::index(
         title,
         html! {
             ul {
-                @for link in &blog_links {
+                @for blog in &blogs {
+                    @let date = blog.frontmatter.date.format("%Y-%m-%d").to_string();
                     li {
-                        a href=(link.href) {
-                            (link.title)
+                        a href=(&blog.href) {
+                            (blog.frontmatter.title)
                         }
-                        span { (link.date) }
+                        span { (date) }
                     }
                 }
             }
