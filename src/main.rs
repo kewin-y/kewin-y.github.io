@@ -34,8 +34,6 @@ fn write_all_blogs() -> anyhow::Result<Vec<site::BlogLink>> {
 
     let mut blogs: Vec<site::BlogLink> = Vec::new();
 
-    println!("{:#?}", md_files);
-
     for md_file in md_files {
         let markdown = fs::read_to_string(&md_file)?;
         let frontmatter = match frontmatter::parse_frontmatter(&markdown) {
