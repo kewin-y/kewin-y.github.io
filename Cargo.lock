@@ -189,6 +189,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "generator"
+version = "0.1.0"
+dependencies = [
+ "ammonia",
+ "anyhow",
+ "chrono",
+ "maud",
+ "pulldown-cmark",
+ "serde",
+ "serde_yaml",
+]
+
+[[package]]
 name = "getopts"
 version = "0.2.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -477,19 +490,6 @@ name = "once_cell"
 version = "1.21.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
-
-[[package]]
-name = "pages"
-version = "0.1.0"
-dependencies = [
- "ammonia",
- "anyhow",
- "chrono",
- "maud",
- "pulldown-cmark",
- "serde",
- "serde_yaml",
-]
 
 [[package]]
 name = "parking_lot"
