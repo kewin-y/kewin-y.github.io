@@ -1,3 +1,4 @@
+use anyhow::{Context, bail};
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 
@@ -8,20 +9,25 @@ pub struct Frontmatter {
     pub date: NaiveDate,
 }
 
-pub fn parse_frontmatter(markdown: &str) -> Option<Frontmatter> {
-    if markdown.starts_with("---\n") {
-        let mut frontmatter = String::new();
-
-        for line in markdown[4..].split_inclusive("\n") {
-            if line == "---\n" {
-                break;
-            }
-            frontmatter.push_str(line);
-        }
-
-        let frontmatter = serde_yaml::from_str(&frontmatter).ok();
-        frontmatter
-    } else {
-        None
+pub fn parse_frontmatter(markdown: &str) -> anyhow::Result<Frontmatter> {
+    if !markdown.starts_with("---\n") {
+        bail!("Missing frontmatter block")
     }
+
+    let mut frontmatter = String::new();
+    let mut found_end = false;
+
+    for line in markdown[4..].split_inclusive("\n") {
+        if line == "---\n" {
+            found_end = true;
+            break;
+        }
+        frontmatter.push_str(line);
+    }
+
+    if !found_end {
+        bail!("Could not find end of frontmatter block")
+    }
+
+    serde_yaml::from_str(&frontmatter).context("Failed to parse YAML frontmatter")
 }

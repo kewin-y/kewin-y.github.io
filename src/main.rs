@@ -7,6 +7,8 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use anyhow::Context;
+
 use crate::site::Blog;
 
 const CONTENT_DIR: &str = "content";
@@ -20,38 +22,44 @@ pub fn to_blog_output_file(path: &PathBuf) -> PathBuf {
     output_file
 }
 
+fn is_md_file(path: &Path) -> bool {
+    path.is_file() && path.extension().is_some_and(|ext| ext == "md")
+}
+
+fn is_image_file(path: &Path) -> bool {
+    path.is_file()
+        && path
+            .extension()
+            .is_some_and(|ext| ext == "png" || ext == "jpg")
+}
+
 fn write_all_blogs() -> anyhow::Result<Vec<Blog>> {
-    let md_files: Vec<PathBuf> = fs::read_dir(CONTENT_DIR)?
-        .flatten()
-        .filter_map(|e| {
-            if e.path().is_file()
-                && !e.path().file_stem().map(|s| s == "index").unwrap_or(false)
-                && e.path().extension().map(|ext| ext == "md").unwrap_or(false)
-            {
-                Some(e.path())
-            } else {
-                None
-            }
-        })
-        .collect();
+    let md_files = fs::read_dir(CONTENT_DIR)
+        .with_context(|| format!("Failed to read files from {}", CONTENT_DIR))?;
 
     let mut blogs: Vec<Blog> = Vec::new();
 
-    for md_file in md_files {
-        let markdown = fs::read_to_string(&md_file)?;
-        let frontmatter = match frontmatter::parse_frontmatter(&markdown) {
-            Some(fm) => fm,
-            None => {
-                eprintln!(
-                    "Could not parse frontmatter for {:#?}. Skipping ...",
-                    md_file.into_os_string().into_string()
-                );
-                continue;
-            }
-        };
-        let blog = site::build_blog(&frontmatter, &markdown);
-        let output_file = to_blog_output_file(&md_file);
+    for entry in md_files {
+        let entry = entry?;
+        let path = entry.path();
 
+        if !is_md_file(&path) {
+            eprintln!("{} is not a markdown file. Skipping ..", path.display());
+            continue;
+        }
+        if path.file_stem().is_some_and(|stem| stem == "index") {
+            eprintln!("Skipping file with stem \"index\" ..");
+            continue;
+        }
+
+        let markdown = fs::read_to_string(&path)
+            .with_context(|| format!("Could not read markdown from {}", path.display()))?;
+        let frontmatter = frontmatter::parse_frontmatter(&markdown)
+            .with_context(|| format!("Could not parse frontmatter for {}", path.display()))?;
+        let blog = site::build_blog(&frontmatter, &markdown);
+        let output_file = to_blog_output_file(&path);
+
+        // TODO: Probably should do a regex test for slugs
         let href = output_file
             .strip_prefix(OUTPUT_DIR)?
             .to_string_lossy()
@@ -67,62 +75,75 @@ fn write_all_blogs() -> anyhow::Result<Vec<Blog>> {
     Ok(blogs)
 }
 
-fn write_index(index: maud::PreEscaped<String>) -> anyhow::Result<()> {
-    let output_file = Path::new(OUTPUT_DIR).join("index.html");
-    fs::write(output_file, index.into_string())?;
-    Ok(())
-}
-
 fn copy_public_files() -> anyhow::Result<()> {
     // Copy index.css
     let index_css_path = Path::new(PUBLIC_DIR).join("index.css");
     let index_css_out_path = Path::new(OUTPUT_DIR).join("index.css");
-    let _ = fs::copy(index_css_path, index_css_out_path)?;
+    fs::copy(&index_css_path, &index_css_out_path).with_context(|| {
+        format!(
+            "Failed to copy {} to {} ..",
+            &index_css_path.display(),
+            &index_css_out_path.display()
+        )
+    })?;
 
-    // TODO: Copy images
+    // Copy images
     let images_dir = Path::new(PUBLIC_DIR).join("images");
     let images_out_dir = Path::new(OUTPUT_DIR).join("images");
 
-    let image_files: Vec<PathBuf> = fs::read_dir(images_dir)?
-        .flatten()
-        .filter_map(|e| {
-            if e.path().is_file()
-                && e.path()
-                    .extension()
-                    .map(|ext| ext == "png" || ext == "jpg")
-                    .unwrap_or(false)
-            {
-                Some(e.path())
-            } else {
-                None
-            }
-        })
-        .collect();
+    fs::create_dir(&images_out_dir)
+        .with_context(|| format!("Failed to create directory {}", images_out_dir.display()))?;
 
-    fs::create_dir(&images_out_dir)?;
+    let image_files = fs::read_dir(&images_dir)
+        .with_context(|| format!("Failed to read images from {}", &images_dir.display()))?;
 
-    for image_file in &image_files {
-        if let Some(image_file_name) = image_file.file_name() {
-            let output_file = images_out_dir.join(image_file_name);
-            let _ = fs::copy(image_file, output_file)?;
+    for entry in image_files {
+        let entry = entry?;
+        let path = entry.path();
+
+        if !is_image_file(&path) {
+            eprintln!(
+                "{} is not an image (png or jpg) file. Skipping ..",
+                path.display()
+            );
+            continue;
+        }
+
+        if let Some(file_name) = path.file_name() {
+            let output_file = images_out_dir.join(file_name);
+            fs::copy(&path, &output_file).with_context(|| {
+                format!(
+                    "Failed to copy {} to {} ..",
+                    &path.display(),
+                    &output_file.display()
+                )
+            })?;
         }
     }
 
     Ok(())
 }
 
+fn write_index(index: maud::PreEscaped<String>) -> anyhow::Result<()> {
+    let output_file = Path::new(OUTPUT_DIR).join("index.html");
+    fs::write(&output_file, index.into_string())
+        .with_context(|| format!("Failed to write index file ({})", &output_file.display()))
+}
+
 fn main() -> anyhow::Result<()> {
+    // Prep
     if Path::is_dir(Path::new(OUTPUT_DIR)) {
-        eprintln!("{} already exists. Removing ...", OUTPUT_DIR);
+        eprintln!("{} already exists. Removing ..", OUTPUT_DIR);
         fs::remove_dir_all(OUTPUT_DIR)?;
     }
-
     fs::create_dir(OUTPUT_DIR)?;
 
+    // Site Creation
     copy_public_files()?;
-
     let blogs = write_all_blogs()?;
     write_index(site::build_index("Kevin Yu", blogs))?;
+
+    eprintln!("Succesfully generated site at ./output");
 
     Ok(())
 }
