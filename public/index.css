@@ -1,5 +1,8 @@
 :root {
   --spacing: 1.5rem;
+  --bg: #1C1917;
+  --fg: #b4bdc3;
+  --links: #AFA099;
 }
 
 *,
@@ -11,11 +14,13 @@
 
 /* Global Styles */
 html {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
 }
 
 body {
+  color: var(--fg);
+  background-color: var(--bg);
   max-width: 42rem;
   margin: 2.5rem auto;
   padding: 0 var(--spacing);
@@ -66,7 +71,7 @@ li {
 }
 
 a {
-  color: #808080;
+  color: var(--links);
   text-decoration: underline;
   margin-top: 0;
 }

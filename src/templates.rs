@@ -51,6 +51,11 @@ pub fn index(title: &str, links: Markup) -> Markup {
                     "In my free time I listen to music, read, and watch anime. \
                     I also draw and do calisthenics, but I'm not as consistent with those."
                 }
+                p {
+                    "The colours used on this website are inspired by the "
+                    a href="https://github.com/zenbones-theme/zenbones.nvim" { "Zenbones" }
+                    " theme."
+                }
             }
             div class="projects" {
                 h1 { "Projects" }
