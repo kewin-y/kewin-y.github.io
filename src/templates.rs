@@ -7,7 +7,7 @@ pub fn page(page_title: &str, body: Markup) -> Markup {
         head {
             meta name="viewport" content="width=device-width";
             meta charset="utf-8";
-            link rel="stylesheet" href="index.css";
+            link rel="stylesheet" href="/index.css";
             title { (page_title) }
         }
         body {
@@ -48,7 +48,8 @@ pub fn index(title: &str, links: Markup) -> Markup {
                     a href="https://www.dataonthespot.com" { "DOTS." }
                 }
                 p {
-                    "In my free time, I mess around with aquariums and listen to music."
+                    "In my free time I listen to music, read, and watch anime. \
+                    I also draw and do calisthenics, but I'm not as consistent with those."
                 }
             }
             div class="projects" {

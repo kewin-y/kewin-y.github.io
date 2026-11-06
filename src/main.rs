@@ -17,7 +17,7 @@ const PUBLIC_DIR: &str = "public";
 
 pub fn to_blog_output_file(path: &PathBuf) -> PathBuf {
     let remainder = path.strip_prefix(CONTENT_DIR).unwrap_or(Path::new(path));
-    let mut output_file = Path::new(OUTPUT_DIR).join(remainder);
+    let mut output_file = Path::new(OUTPUT_DIR).join("blogs").join(remainder);
     output_file.set_extension("html");
     output_file
 }
@@ -136,7 +136,9 @@ fn main() -> anyhow::Result<()> {
         eprintln!("{} already exists. Removing ..", OUTPUT_DIR);
         fs::remove_dir_all(OUTPUT_DIR)?;
     }
+    let blogs_dir = Path::new(OUTPUT_DIR).join("blogs");
     fs::create_dir(OUTPUT_DIR)?;
+    fs::create_dir(blogs_dir)?;
 
     // Site Creation
     copy_public_files()?;
